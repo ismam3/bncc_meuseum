@@ -18,7 +18,6 @@
                     // document.querySelector("#cameraWrapper").object3D.position.set(1, 1, 1);
                     // let hh = document.querySelector("#cameraWrapper").object3D.position.get;
                     z = z - 1
-                    console.log(x, y, z)
                     document.querySelector("#cameraWrapper").setAttribute("position", {x, y, z})
                 }
                 else if(e.keyCode === 65){
@@ -34,12 +33,67 @@
                     document.querySelector("#cameraWrapper").setAttribute("position", {x, y, z})
                 }
             })
+            function clickMovement(direction){
+                let {x, y, z} = document.querySelector("#cameraWrapper").getAttribute("position")
+                if(direction.id === "forward"){
+                    z = z - 1
+                    document.querySelector("#cameraWrapper").setAttribute("position", {x, y, z})
+                }
+                else if(direction.id === "left"){
+                    x = x - 1
+                    document.querySelector("#cameraWrapper").setAttribute("position", {x, y, z})
+                }
+                else if(direction.id === "backward"){
+                    z = z + 1
+                    document.querySelector("#cameraWrapper").setAttribute("position", {x, y, z})
+                }
+                else if(direction.id === "right"){
+                    x = x + 1
+                    document.querySelector("#cameraWrapper").setAttribute("position", {x, y, z})
+                }
+            }
           </script>
         <title>BNCC Meuseum</title>
+        <style>
+            .controller{
+                position: fixed;
+                width: 70px;
+                height: 70px;
+                z-index: 3;
+                background: transparent;
+                color: black;
+                font-size: 42px;
+                font-weight: 900;
+                border:1px black inset;
+                border-radius: 25px;
+                text-align: center;
+                vertical-align: middle;
+            }
+            #forward{
+                left: calc(50vw - 35px);
+                top: 0;
+            }
+            #left{
+                left: 0;
+                top: calc(50vh - 35px);
+            }
+            #backward{
+                left:calc(50vw - 35px);
+                bottom: 0;
+            }
+            #right{
+                right: 0;
+                top: calc(50vh - 35px);
+            }
+        </style>
     </head>
     <body>
+        
         <a-scene physics="debug: true">
-            
+            <div class="controller" id="forward" onclick="clickMovement(this)">&uarr;</div>
+            <div class="controller" id="left" onclick="clickMovement(this)">&larr;</div>
+            <div class="controller" id="backward" onclick="clickMovement(this)">&darr;</div>
+            <div class="controller" id="right" onclick="clickMovement(this)">&rarr;</div>
             <!-- assets -->
             <a-assets>
                 <img id="grass_texture" src="textures/grass(1).jpg">
