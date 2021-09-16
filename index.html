@@ -1,0 +1,96 @@
+<html>
+    <head>
+        <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+        <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+        <script>
+            // AFRAME.registerComponent('rotation-reader', {
+            //     tick: function () {
+            //         // `this.el` is the element.
+            //         // `object3D` is the three.js object.
+
+            //         // `position` is a three.js Vector3.
+            //         console.log(this.el.object3D.position);
+            //     }
+            // });
+            window.addEventListener("keydown",function (e){
+                let {x, y, z} = document.querySelector("#cameraWrapper").getAttribute("position")
+                if(e.keyCode === 87){
+                    // document.querySelector("#cameraWrapper").object3D.position.set(1, 1, 1);
+                    // let hh = document.querySelector("#cameraWrapper").object3D.position.get;
+                    z = z - 1
+                    console.log(x, y, z)
+                    document.querySelector("#cameraWrapper").setAttribute("position", {x, y, z})
+                }
+                else if(e.keyCode === 65){
+                    x = x - 1
+                    document.querySelector("#cameraWrapper").setAttribute("position", {x, y, z})
+                }
+                else if(e.keyCode === 83){
+                    z = z + 1
+                    document.querySelector("#cameraWrapper").setAttribute("position", {x, y, z})
+                }
+                else if(e.keyCode === 68){
+                    x = x + 1
+                    document.querySelector("#cameraWrapper").setAttribute("position", {x, y, z})
+                }
+            })
+          </script>
+        <title>BNCC Meuseum</title>
+    </head>
+    <body>
+        <a-scene physics="debug: true">
+            
+            <!-- assets -->
+            <a-assets>
+                <img id="grass_texture" src="textures/grass(1).jpg">
+                <img id="sky_texture" src="textures/clear_sky.jpeg">
+                <img id="concrete_texture" src="textures/concrete_texture.jpg">
+                <img id="brick_texture" src="textures/brick_texture.jpg">
+                <img id="white_marbel" src="textures/white_marbel_tiles.jpg">
+                <img id="surface_tile" src="textures/surface-tile.jpg">
+                <img id="logo" src="Bncc_logo.png">
+              </a-assets>
+
+
+              <!-- sky -->
+              <a-sky src="#sky_texture"></a-sky>
+              <!-- plane -->
+              <a-plane rotation="-90 0 0" material="src:#grass_texture;repeat:500 500" scale="1000 1000 0" position="0 0 0"></a-plane>
+
+              <!-- walls -->
+              <a-box src="#concrete_texture" depth="0.5" height="4" width="6" position="-6 2 -8" change-color-on-hover="color: blue"></a-box>
+              <a-box src="#concrete_texture" depth="0.5" height="4" width="6" position="4 2 -8"></a-box>
+              <a-box src="#concrete_texture" depth="0.5" height="4" width="26" position="-1 5.75 -11.75"></a-box>
+              <a-box src="#concrete_texture" depth="0.5" height="8" width="15" position="11.75 4 -19" rotation="0 90 0"></a-box>
+              <a-box src="#concrete_texture" depth="0.5" height="8" width="15" position="-13.75 4 -19" rotation="0 90 0"></a-box>
+              <a-box src="#concrete_texture" depth="0.5" height="8" width="26" position="-1 4 -26"></a-box>
+              <a-box src="#concrete_texture" depth="0.5" height="4" width="5" position="9.5 2 -11.75"></a-box>
+              <a-box src="#concrete_texture" depth="0.5" height="4" width="5" position="-11.5 2 -11.75"></a-box>
+              <a-box src="#concrete_texture" depth="0.5" height="4" width="3.5" position="-8.75 2 -9.75" rotation="0 90 0"></a-box>
+              <a-box src="#concrete_texture" depth="0.5" height="4" width="3.5" position="6.75 2 -9.75" rotation="0 90 0"></a-box>
+              
+
+              <!-- roof -->
+              <a-box src="#concrete_texture" depth="0.5" height="6" width="16" position="-1 4 -9" rotation="90 0 0"></a-box>
+              <a-box src="#concrete_texture" depth="15" height="0.5" width="26" position="-1 8 -19" rotation="0 0 0"></a-box>
+
+              <!-- tiles -->
+              <a-plane src="#white_marbel" position="-1 0.09 -19" width="26" height="15" rotation="-90 0 0"></a-plane>
+              <a-plane src="#brick_texture" height="6" width="16" position="-1 0.09 -8.5" repeat="5 5" rotation="-90 0 0"></a-plane>
+
+              <!-- outside -->
+              <a-image src="#logo" height="1" width="1" position="4 2.5 -7.7"></a-image>
+              <a-text value="
+                 BNCC
+                Meuseum
+              " position="4 1.2 -7.7" color="gray" height="1.5" width="10" align="center"></a-text>
+              <a-text value="
+              Knowledge, Discipline, The volunteers
+              " position="-1 4 -5.98" color="crimson" height="1.5" width="10" align="center"></a-text>
+
+              <a-entity id='cameraWrapper'>
+                <a-camera></a-camera>
+              </a-entity>
+        </a-scene>
+    </body>
+</html>
