@@ -3,133 +3,17 @@
         <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
         <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
         <script>
-            function polar(z, theta){
-                var r = z/Math.sin((theta * Math.PI)/180);
-                return r;
+            function mouseEnter(key_code){
+                var keyDownEvent = new KeyboardEvent("keydown",{
+                    keyCode:key_code
+                })
+                window.dispatchEvent(keyDownEvent)
             }
-            function cartesian(r, theta){
-                theta = (theta * Math.PI)/180;
-                var z = r*Math.sin(theta);
-                var x = r*Math.cos(theta);
-                return {x, z}
-            }
-            // window.addEventListener("keydown",function (e){
-            //     let {x, y, z} = document.querySelector("#cameraWrapper").getAttribute("position")
-            //     let rotation = document.querySelector("#cameraWrapper").getAttribute("rotation")
-            //     let rx = rotation.x;
-            //     let ry = rotation.y;
-            //     let rz = rotation.z;
-            //     if(e.keyCode === 87){
-            //         if(Math.sin((ry * Math.PI)/180)===0){
-            //             z = z - 1
-            //             document.querySelector("#cameraWrapper").setAttribute("position", {x, y, z})
-            //         }
-            //         // z = z - 1
-            //         // document.querySelector("#cameraWrapper").setAttribute("position", {x, y, z})
-            //         // console.log(polar(z, ry));
-            //         else{
-            //             var polar_axis = polar(z, ry);
-            //             polar_axis = polar_axis + 1
-            //             var ordinates = cartesian(polar_axis, ry);
-            //             document.querySelector("#cameraWrapper").setAttribute("position", {x:ordinates.x, y, z:ordinates.z})
-            //         }
-            //     }
-            //     else if(e.keyCode === 65){
-            //         // x = x - 1
-            //         // document.querySelector("#cameraWrapper").setAttribute("position", {x, y, z})
-            //         var polar_axis = polar(z, ry + 90);
-            //         polar_axis = polar_axis + 1
-            //         var ordinates = cartesian(polar_axis, ry);
-            //         document.querySelector("#cameraWrapper").setAttribute("position", {x:ordinates.z, y, z:z})
-            //     }
-            //     else if(e.keyCode === 83){
-            //         if(Math.sin((ry * Math.PI)/180)===0){
-            //             z = z + 1
-            //             document.querySelector("#cameraWrapper").setAttribute("position", {x, y, z})
-            //         }
-            //         else{
-            //             var polar_axis = polar(z, ry);
-            //             polar_axis = polar_axis - 1
-            //             var ordinates = cartesian(polar_axis, ry);
-            //             document.querySelector("#cameraWrapper").setAttribute("position", {x:ordinates.x, y, z:ordinates.z})
-            //         }
-            //     }
-            //     else if(e.keyCode === 68){
-            //         // x = x + 1
-            //         // document.querySelector("#cameraWrapper").setAttribute("position", {x, y, z})
-            //         var polar_axis = polar(z, ry - 90);
-            //         polar_axis = polar_axis - 1
-            //         var ordinates = cartesian(polar_axis, ry);
-            //         document.querySelector("#cameraWrapper").setAttribute("position", {x:ordinates.z, y, z:z})
-            //     }
-            //     else if(e.keyCode === 82){
-            //         ry = ry - 90
-            //         document.querySelector("#cameraWrapper").setAttribute("rotation", {x:rx, y:ry, z:rz})
-            //     }
-            //     else if(e.keyCode === 76){
-            //         ry = ry + 90
-            //         document.querySelector("#cameraWrapper").setAttribute("rotation", {x:rx, y:ry, z:rz})
-            //     }
-            // })
-            function clickMovement(direction){
-                let {x, y, z} = document.querySelector("#cameraWrapper").getAttribute("position")
-                if(direction.id === "forward"){
-                    
-                    // z = z - 1
-                    // document.querySelector("#cameraWrapper").setAttribute("position", {x, y, z})
-                    var keydownEvent = new KeyboardEvent("keydown",{
-                        keyCode: 87
-                    })
-                    var keyupEvent = new KeyboardEvent("keyup",{
-                        keyCode: 87
-                    })
-                    window.dispatchEvent(keydownEvent)
-                    setInterval(()=>{
-                        window.dispatchEvent(keyupEvent)
-                    }, 500)
-                }
-                else if(direction.id === "left"){
-                    // x = x - 1
-                    // document.querySelector("#cameraWrapper").setAttribute("position", {x, y, z})
-                    var keydownEvent = new KeyboardEvent("keydown",{
-                        keyCode: 65
-                    })
-                    var keyupEvent = new KeyboardEvent("keyup",{
-                        keyCode: 65
-                    })
-                    window.dispatchEvent(keydownEvent)
-                    setInterval(()=>{
-                        window.dispatchEvent(keyupEvent)
-                    }, 500)
-                }
-                else if(direction.id === "backward"){
-                    // z = z + 1
-                    // document.querySelector("#cameraWrapper").setAttribute("position", {x, y, z})
-                    var keydownEvent = new KeyboardEvent("keydown",{
-                        keyCode: 83
-                    })
-                    var keyupEvent = new KeyboardEvent("keyup",{
-                        keyCode: 83
-                    })
-                    window.dispatchEvent(keydownEvent)
-                    setInterval(()=>{
-                        window.dispatchEvent(keyupEvent)
-                    }, 500)
-                }
-                else if(direction.id === "right"){
-                    // x = x + 1
-                    // document.querySelector("#cameraWrapper").setAttribute("position", {x, y, z})
-                    var keydownEvent = new KeyboardEvent("keydown",{
-                        keyCode: 68
-                    })
-                    var keyupEvent = new KeyboardEvent("keyup",{
-                        keyCode: 68
-                    })
-                    window.dispatchEvent(keydownEvent)
-                    setInterval(()=>{
-                        window.dispatchEvent(keyupEvent)
-                    }, 500)
-                }
+            function mouseLeave(key_code){
+                var keyUpEvent = new KeyboardEvent("keyup",{
+                    keyCode:key_code
+                })
+                window.dispatchEvent(keyUpEvent)
             }
           </script>
         <title>BNCC Meuseum</title>
@@ -172,10 +56,10 @@
     <body style="user-select: none; -webkit-app-region:drag;">
         
         <a-scene physics="debug: true">
-            <div class="controller" id="forward" onclick="clickMovement(this)">&uarr;</div>
-            <div class="controller" id="left" onclick="clickMovement(this)">&larr;</div>
-            <div class="controller" id="backward" onclick="clickMovement(this)">&darr;</div>
-            <div class="controller" id="right" onclick="clickMovement(this)">&rarr;</div>
+            <div class="controller" id="forward" onmouseenter="mouseEnter(87)" onmouseleave="mouseLeave(87)">&uarr;</div>
+            <div class="controller" id="left" onmouseenter="mouseEnter(65)" onmouseleave="mouseLeave(65)">&larr;</div>
+            <div class="controller" id="backward" onmouseenter="mouseEnter(83)" onmouseleave="mouseLeave(83)">&darr;</div>
+            <div class="controller" id="right" onmouseenter="mouseEnter(68)" onmouseleave="mouseLeave(68)">&rarr;</div>
             <!-- assets -->
             <a-assets>
                 <img id="grass_texture" src="textures/grass(1).jpg">
