@@ -1,0 +1,32 @@
+{
+    "short_name": "BNCC VM",
+    "name": "BNCC Virtual Museum",
+    "description":"A virtual museum of BNCC. This is just a pet project. BNCC isn't affiliated with this.",
+    "author":"Ismam Labib",
+    "icons": [
+      {
+        "src": "/icons/icon-192.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "/icons/icon-192.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "start_url": ".",
+    "background_color": "#006a4e",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#f42a41",
+    "shortcuts": [
+      {
+        "name": "BNCC Virtual Museum",
+        "short_name": "BNCC VM",
+        "description": "A virtual museum of BNCC. This is just a pet project. BNCC isn't affiliated with this.",
+        "url": "/",
+        "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+      }
+    ]
+  }

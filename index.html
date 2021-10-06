@@ -1,7 +1,6 @@
 <html>
     <head>
-        <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
-        <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+        <script src="script.js"></script>
         <script>
             function mouseEnter(key_code){
                 var keyDownEvent = new KeyboardEvent("keydown",{
@@ -16,6 +15,8 @@
                 window.dispatchEvent(keyUpEvent)
             }
           </script>
+          <link rel="shortcut icon" href="./Bncc_logo.png" type="image/x-icon">
+          <link rel="manifest" href="/manifest.json">
         <title>BNCC Meuseum</title>
         <style>
             .controller{
@@ -60,7 +61,7 @@
     </head>
     <body style="user-select: none; -webkit-app-region:drag;">
         
-        <a-scene physics="debug: true">
+        <a-scene>
             <div class="controller" id="forward" onmouseenter="mouseEnter(87)" onmouseleave="mouseLeave(87)">&uarr;</div>
             <div class="controller" id="left" onmouseenter="mouseEnter(65)" onmouseleave="mouseLeave(65)">&larr;</div>
             <div class="controller" id="backward" onmouseenter="mouseEnter(83)" onmouseleave="mouseLeave(83)">&darr;</div>
