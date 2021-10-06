@@ -5,12 +5,12 @@
     "author":"Ismam Labib",
     "icons": [
       {
-        "src": "/icons/icon-192.png",
+        "src": "icons/icon-192.png",
         "type": "image/png",
         "sizes": "192x192"
       },
       {
-        "src": "/icons/icon-192.png",
+        "src": "icons/icon-192.png",
         "type": "image/png",
         "sizes": "512x512"
       }
@@ -26,7 +26,7 @@
         "short_name": "BNCC VM",
         "description": "A virtual museum of BNCC. This is just a pet project. BNCC isn't affiliated with this.",
         "url": "/",
-        "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+        "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
       }
     ]
   }
