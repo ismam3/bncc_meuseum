@@ -1,7 +1,8 @@
 <html>
     <head>
-        <script src="script.js"></script>
-        <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+        <script src="a-frame_0_8_2.min.js"></script>
+    <script src="aframe-extras.min.js"></script>
+    <script src="aframe-physics-system.min.js"></script>
         <script>
             function mouseEnter(key_code){
                 var keyDownEvent = new KeyboardEvent("keydown",{
@@ -62,7 +63,7 @@
     </head>
     <body style="user-select: none; -webkit-app-region:drag;">
         
-        <a-scene physics="debug: true">
+        <a-scene physics="debug: false">
             <div class="controller" id="forward" onmouseenter="mouseEnter(87)" onmouseleave="mouseLeave(87)">&uarr;</div>
             <div class="controller" id="left" onmouseenter="mouseEnter(65)" onmouseleave="mouseLeave(65)">&larr;</div>
             <div class="controller" id="backward" onmouseenter="mouseEnter(83)" onmouseleave="mouseLeave(83)">&darr;</div>
@@ -103,19 +104,19 @@
               <!-- sky -->
               <a-sky src="#sky_texture"></a-sky>
               <!-- plane -->
-              <a-plane rotation="-90 0 0" material="src:#grass_texture;repeat:500 500" scale="1000 1000 0" position="0 0 0"></a-plane>
+              <a-plane static-body rotation="-90 0 0" material="src:#grass_texture;repeat:500 500" scale="1000 1000 0" position="0 0 0"></a-plane>
 
               <!-- walls -->
-              <a-box src="#concrete_texture" depth="0.5" height="4" width="6" position="-6 2 -8" change-color-on-hover="color: blue"></a-box>
-              <a-box src="#concrete_texture" depth="0.5" height="4" width="6" position="4 2 -8"></a-box>
-              <a-box src="#concrete_texture" depth="0.5" height="4" width="26" position="-1 5.75 -11.75"></a-box>
-              <a-box src="#concrete_texture" depth="0.5" height="8" width="15" position="11.75 4 -19" rotation="0 90 0"></a-box>
-              <a-box src="#concrete_texture" depth="0.5" height="8" width="15" position="-13.75 4 -19" rotation="0 90 0"></a-box>
-              <a-box src="#concrete_texture" depth="0.5" height="8" width="26" position="-1 4 -26"></a-box>
-              <a-box src="#concrete_texture" depth="0.5" height="4" width="5" position="9.5 2 -11.75"></a-box>
-              <a-box src="#concrete_texture" depth="0.5" height="4" width="5" position="-11.5 2 -11.75"></a-box>
-              <a-box src="#concrete_texture" depth="0.5" height="4" width="3.5" position="-8.75 2 -9.75" rotation="0 90 0"></a-box>
-              <a-box src="#concrete_texture" depth="0.5" height="4" width="3.5" position="6.75 2 -9.75" rotation="0 90 0"></a-box>
+              <a-box static-body src="#concrete_texture" depth="0.5" height="4" width="6" position="-6 2 -8"></a-box>
+              <a-box static-body src="#concrete_texture" depth="0.5" height="4" width="6" position="4 2 -8"></a-box>
+              <a-box static-body src="#concrete_texture" depth="0.5" height="4" width="26" position="-1 5.75 -11.75"></a-box>
+              <a-box static-body src="#concrete_texture" depth="0.5" height="8" width="15" position="11.75 4 -19" rotation="0 90 0"></a-box>
+              <a-box static-body src="#concrete_texture" depth="0.5" height="8" width="15" position="-13.75 4 -19" rotation="0 90 0"></a-box>
+              <a-box static-body src="#concrete_texture" depth="0.5" height="8" width="26" position="-1 4 -26"></a-box>
+              <a-box static-body src="#concrete_texture" depth="0.5" height="4" width="5" position="9.5 2 -11.75"></a-box>
+              <a-box static-body src="#concrete_texture" depth="0.5" height="4" width="5" position="-11.5 2 -11.75"></a-box>
+              <a-box static-body src="#concrete_texture" depth="0.5" height="4" width="3.5" position="-8.75 2 -9.75" rotation="0 90 0"></a-box>
+              <a-box static-body src="#concrete_texture" depth="0.5" height="4" width="3.5" position="6.75 2 -9.75" rotation="0 90 0"></a-box>
               
 
               <!-- roof -->
@@ -191,8 +192,8 @@
               <a-image position="-13.3 2.5 -20" src="#7" height="1.5" width="1.5" rotation="0 270 0"></a-image>
               <a-image position="-13.3 2.5 -22" src="#8" height="1.5" width="1.5" rotation="0 270 0"></a-image>
 
-              <a-entity id="cameraWrapper">
-                  <a-camera></a-camera>
+              <a-entity look-controls kinematic-body="radius: 0.8" wasd-controls position="0 0 4" id="cameraWrapper">
+                <a-entity camera position="0 1.6 0" ></a-entity>
               </a-entity>
         </a-scene>
     </body>
