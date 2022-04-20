@@ -1,8 +1,9 @@
 <html>
     <head>
         <script src="a-frame_0_8_2.min.js"></script>
-    <script src="aframe-extras.min.js"></script>
-    <script src="aframe-physics-system.min.js"></script>
+        <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>  
+        <script src="aframe-physics-system.min.js"></script>
         <script>
             function mouseEnter(key_code){
                 var keyDownEvent = new KeyboardEvent("keydown",{
@@ -64,10 +65,10 @@
     <body style="user-select: none; -webkit-app-region:drag;">
         
         <a-scene physics="debug: false">
-            <div class="controller" id="forward" onmouseenter="mouseEnter(87)" onmouseleave="mouseLeave(87)">&uarr;</div>
+            <!-- <div class="controller" id="forward" onmouseenter="mouseEnter(87)" onmouseleave="mouseLeave(87)">&uarr;</div>
             <div class="controller" id="left" onmouseenter="mouseEnter(65)" onmouseleave="mouseLeave(65)">&larr;</div>
             <div class="controller" id="backward" onmouseenter="mouseEnter(83)" onmouseleave="mouseLeave(83)">&darr;</div>
-            <div class="controller" id="right" onmouseenter="mouseEnter(68)" onmouseleave="mouseLeave(68)">&rarr;</div>
+            <div class="controller" id="right" onmouseenter="mouseEnter(68)" onmouseleave="mouseLeave(68)">&rarr;</div> -->
             <!-- assets -->
             <a-assets>
                 <img id="grass_texture" src="textures/grass(1).jpg">
@@ -192,9 +193,70 @@
               <a-image position="-13.3 2.5 -20" src="#7" height="1.5" width="1.5" rotation="0 270 0"></a-image>
               <a-image position="-13.3 2.5 -22" src="#8" height="1.5" width="1.5" rotation="0 270 0"></a-image>
 
-              <a-entity look-controls kinematic-body="radius: 0.8" wasd-controls position="0 0 4" id="cameraWrapper">
+              <!-- <a-entity look-controls kinematic-body="radius: 0.8" wasd-controls position="0 0 4" id="cameraWrapper">
                 <a-entity camera position="0 1.6 0" ></a-entity>
-              </a-entity>
+              </a-entity> -->
+
+              <a-entity id="cameraRig" position="0 1.6 0" >
+                <a-entity kinematic-body="radius: 0.8" id="head" position="0 0 0" camera="userHeight:1.6" look-controls="pointerLockEnabled:true">
+                    <a-entity position="0.1 -0.1 0"
+                        touch-listener
+                        teleport-controls=
+                            "cameraRig: #cameraRig;
+                            teleportOrigin: #head;
+                            startEvents:starttouch;
+                            endEvents:endtouch;
+                            curveShootingSpeed:3;
+                            hitCylinderRadius:0.1;
+                            collisionEntities: [mesh]"
+                    >
+                    <!-- collisionEntities: [mesh] -->
+                    </a-entity>
+                    <a-cursor></a-cursor>
+                </a-entity>
+            </a-entity>
         </a-scene>
+        <script>
+            AFRAME.registerComponent('touch-listener', {
+                init: function () {
+                    var targetEl = this.el;
+
+                    //Create the touchstart event
+                    document.querySelector('a-scene').addEventListener('touchstart', function () {
+                    targetEl.emit('starttouch')
+                    })
+
+                    document.querySelector('a-scene').addEventListener('mousedown', function () {
+                    targetEl.emit('starttouch')
+                    })
+
+                    document.body.addEventListener('keydown', function (e) {
+                    if (e.keyCode == 32) {
+                        console.log('space key pressed!');
+                        targetEl.emit('starttouch');      
+                    }  
+                    })
+                    
+                    //Create the touchend event
+                    document.querySelector('a-scene').addEventListener('touchend', function () {
+                    targetEl.emit('endtouch')
+                    })
+                    
+                    document.querySelector('a-scene').addEventListener('mouseup', function () {
+                    targetEl.emit('endtouch')
+                    })
+                    
+                    document.body.addEventListener('keyup', function (e) {
+                    if (e.keyCode == 32) {
+                        console.log('space key released!');
+                        targetEl.emit('endtouch');      
+                    }  
+                    })
+
+                    
+                }
+                });
+
+        </script>
     </body>
 </html>
